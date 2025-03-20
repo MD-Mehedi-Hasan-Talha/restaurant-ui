@@ -1,88 +1,45 @@
-import React, { useState } from 'react';
-import { Restaurant, OrderItem, Order } from './types';
-import { Header } from './components/common/Header';
-import { Footer } from './components/common/Footer';
+import React from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { Layout } from './components/layout/Layout';
 import { RestaurantList } from './components/RestaurantList';
-import { Menu } from './components/Menu';
+import { RestaurantDetails } from './components/restaurant/RestaurantDetails';
 import { OrderConfirmation } from './components/OrderConfirmation';
 import { OrderTracking } from './components/OrderTracking';
+import { CartPage } from './components/cart/CartPage';
+import { ProfilePage } from './components/profile/ProfilePage';
+import { Hero } from './components/home/Hero';
+import { FeaturedSection } from './components/home/FeaturedSection';
+import { PopularCategories } from './components/home/PopularCategories';
+import { CartProvider } from './context/CartContext';
 
-type AppState = {
-  view: 'restaurants' | 'menu' | 'confirmation' | 'tracking';
-  selectedRestaurant?: Restaurant;
-  currentOrder?: Order;
-  orderItems?: OrderItem[];
-};
+function HomePage() {
+  return (
+    <>
+      <Hero />
+      <PopularCategories />
+      <FeaturedSection />
+      <RestaurantList onSelectRestaurant={() => {}} />
+    </>
+  );
+}
 
 function App() {
-  const [state, setState] = useState<AppState>({
-    view: 'restaurants',
-  });
-
-  const handleSelectRestaurant = (restaurant: Restaurant) => {
-    setState({
-      view: 'menu',
-      selectedRestaurant: restaurant,
-    });
-  };
-
-  const handlePlaceOrder = (items: OrderItem[]) => {
-    setState({
-      ...state,
-      view: 'confirmation',
-      orderItems: items,
-    });
-  };
-
-  const handleConfirmOrder = (customerName: string, address: string) => {
-    const order: Order = {
-      id: Math.random().toString(36).substr(2, 9),
-      restaurantId: state.selectedRestaurant!.id,
-      items: state.orderItems!,
-      status: 'Preparing',
-      customerName,
-      address,
-      total: state.orderItems!.reduce(
-        (sum, item) => sum + item.menuItem.price * item.quantity,
-        0
-      ),
-      createdAt: new Date(),
-      paymentMethod: 'card',
-      contactNumber: '',
-    };
-
-    setState({
-      ...state,
-      view: 'tracking',
-      currentOrder: order,
-    });
-  };
-
   return (
-    <div className="min-h-screen flex flex-col bg-gray-50">
-      <Header />
-      <main className="flex-1">
-        {state.view === 'restaurants' && (
-          <RestaurantList onSelectRestaurant={handleSelectRestaurant} />
-        )}
-        {state.view === 'menu' && state.selectedRestaurant && (
-          <Menu
-            restaurant={state.selectedRestaurant}
-            onPlaceOrder={handlePlaceOrder}
-          />
-        )}
-        {state.view === 'confirmation' && state.orderItems && (
-          <OrderConfirmation
-            items={state.orderItems}
-            onConfirm={handleConfirmOrder}
-          />
-        )}
-        {state.view === 'tracking' && state.currentOrder && (
-          <OrderTracking order={state.currentOrder} />
-        )}
-      </main>
-      <Footer />
-    </div>
+    <CartProvider>
+      <BrowserRouter>
+        <Layout>
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/restaurants" element={<RestaurantList onSelectRestaurant={() => {}} />} />
+            <Route path="/restaurants/:id" element={<RestaurantDetails />} />
+            <Route path="/cart" element={<CartPage />} />
+            <Route path="/profile" element={<ProfilePage />} />
+            <Route path="/order-confirmation" element={<OrderConfirmation items={[]} onConfirm={() => {}} />} />
+            <Route path="/order-tracking/:id" element={<OrderTracking order={null} />} />
+          </Routes>
+        </Layout>
+      </BrowserRouter>
+    </CartProvider>
   );
 }
 

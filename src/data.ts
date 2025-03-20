@@ -1,4 +1,4 @@
-import { MenuItem, Restaurant, Category } from './types';
+import { Category, MenuItem, Restaurant } from './types';
 
 export const categories: Category[] = [
   { id: '1', name: 'Italian', description: 'Pizza, Pasta, and more' },
@@ -142,6 +142,50 @@ export const menuItems: Record<string, MenuItem[]> = {
     },
   ],
   '3': [
+    {
+      id: '1',
+      name: 'California Roll',
+      description: 'Crab, avocado, and cucumber roll with tobiko',
+      price: 8.99,
+      category: 'Sushi Rolls',
+      isAvailable: true,
+      isVegetarian: false,
+      image: 'https://images.unsplash.com/photo-1579871494447-9811cf80d66c?auto=format&fit=crop&w=800',
+    },
+    {
+      id: '2',
+      name: 'Salmon Nigiri',
+      description: 'Fresh salmon over seasoned rice',
+      price: 6.99,
+      category: 'Nigiri',
+      isAvailable: true,
+      isVegetarian: false,
+      image: 'https://images.unsplash.com/photo-1579871494447-9811cf80d66c?auto=format&fit=crop&w=800',
+    },
+  ],
+  '4': [
+    {
+      id: '1',
+      name: 'California Roll',
+      description: 'Crab, avocado, and cucumber roll with tobiko',
+      price: 8.99,
+      category: 'Sushi Rolls',
+      isAvailable: true,
+      isVegetarian: false,
+      image: 'https://images.unsplash.com/photo-1579871494447-9811cf80d66c?auto=format&fit=crop&w=800',
+    },
+    {
+      id: '2',
+      name: 'Salmon Nigiri',
+      description: 'Fresh salmon over seasoned rice',
+      price: 6.99,
+      category: 'Nigiri',
+      isAvailable: true,
+      isVegetarian: false,
+      image: 'https://images.unsplash.com/photo-1579871494447-9811cf80d66c?auto=format&fit=crop&w=800',
+    },
+  ],
+  '5': [
     {
       id: '1',
       name: 'California Roll',

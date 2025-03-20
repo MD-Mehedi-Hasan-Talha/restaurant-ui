@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import { Clock, DollarSign, Search, Star } from 'lucide-react';
+import { useState } from 'react';
+import { Link } from 'react-router-dom';
+import { categories, restaurants } from '../data';
 import { Restaurant } from '../types';
-import { restaurants, categories } from '../data';
-import { Search, Star, Clock, DollarSign } from 'lucide-react';
 
 export function RestaurantList({ onSelectRestaurant }: { onSelectRestaurant: (restaurant: Restaurant) => void }) {
   const [searchTerm, setSearchTerm] = useState('');
@@ -62,7 +63,8 @@ export function RestaurantList({ onSelectRestaurant }: { onSelectRestaurant: (re
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {sortedRestaurants.map((restaurant) => (
-          <div
+          <Link
+            to={`/restaurants/${restaurant.id}`}
             key={restaurant.id}
             className="bg-white rounded-lg shadow-md overflow-hidden cursor-pointer transform transition hover:scale-105"
             onClick={() => onSelectRestaurant(restaurant)}
@@ -102,7 +104,7 @@ export function RestaurantList({ onSelectRestaurant }: { onSelectRestaurant: (re
                 ))}
               </div>
             </div>
-          </div>
+          </Link>
         ))}
       </div>
     </div>
