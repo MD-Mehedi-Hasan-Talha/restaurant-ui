@@ -11,6 +11,9 @@ import { Hero } from './components/home/Hero';
 import { FeaturedSection } from './components/home/FeaturedSection';
 import { PopularCategories } from './components/home/PopularCategories';
 import { CartProvider } from './context/CartContext';
+import { AuthProvider } from './context/AuthContext';
+import { LoginPage } from './components/auth/LoginPage';
+import { SignupPage } from './components/auth/SignupPage';
 
 function HomePage() {
   return (
@@ -25,21 +28,25 @@ function HomePage() {
 
 function App() {
   return (
-    <CartProvider>
-      <BrowserRouter>
-        <Layout>
-          <Routes>
-            <Route path="/" element={<HomePage />} />
-            <Route path="/restaurants" element={<RestaurantList onSelectRestaurant={() => {}} />} />
-            <Route path="/restaurants/:id" element={<RestaurantDetails />} />
-            <Route path="/cart" element={<CartPage />} />
-            <Route path="/profile" element={<ProfilePage />} />
-            <Route path="/order-confirmation" element={<OrderConfirmation items={[]} onConfirm={() => {}} />} />
-            <Route path="/order-tracking/:id" element={<OrderTracking order={null} />} />
-          </Routes>
-        </Layout>
-      </BrowserRouter>
-    </CartProvider>
+    <AuthProvider>
+      <CartProvider>
+        <BrowserRouter>
+          <Layout>
+            <Routes>
+              <Route path="/" element={<HomePage />} />
+              <Route path="/login" element={<LoginPage />} />
+              <Route path="/signup" element={<SignupPage />} />
+              <Route path="/restaurants" element={<RestaurantList onSelectRestaurant={() => {}} />} />
+              <Route path="/restaurants/:id" element={<RestaurantDetails />} />
+              <Route path="/cart" element={<CartPage />} />
+              <Route path="/profile" element={<ProfilePage />} />
+              <Route path="/order-confirmation" element={<OrderConfirmation items={[]} onConfirm={() => {}} />} />
+              <Route path="/order-tracking/:id" element={<OrderTracking order={null} />} />
+            </Routes>
+          </Layout>
+        </BrowserRouter>
+      </CartProvider>
+    </AuthProvider>
   );
 }
 

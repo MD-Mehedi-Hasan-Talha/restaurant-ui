@@ -9,7 +9,6 @@ export function Menu({ restaurant }: { restaurant: Restaurant }) {
   const [specialInstructions, setSpecialInstructions] = useState<Record<string, string>>({});
 
   const menu = menuItems[restaurant.id];
-  console.log(menu);
   const categories = Array.from(new Set(menu.map((item) => item.category)));
 
   const addToCart = (item: MenuItem) => {

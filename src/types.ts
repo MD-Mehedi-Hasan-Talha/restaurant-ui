@@ -59,3 +59,20 @@ export interface Category {
   name: string;
   description?: string;
 }
+
+
+export interface User {
+  id: string;
+  name: string;
+  email: string;
+  address?: string;
+  phone?: string;
+  createdAt: Date;
+}
+
+export interface AuthState {
+  user: User | null;
+  isAuthenticated: boolean;
+  loading: boolean;
+  error: string | null;
+}
