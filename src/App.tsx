@@ -7,8 +7,10 @@ import { PrivateRoute } from './components/auth/PrivateRoute';
 import { SignupPage } from './components/auth/SignupPage';
 import { CartPage } from './components/cart/CartPage';
 import { DashboardLayout } from './components/dashboard/DashboardLayout';
+import MenuManagement from './components/dashboard/MenuManagement';
 import { OrderManagement } from './components/dashboard/OrderManagement';
 import { RestaurantDashboard } from './components/dashboard/RestaurantDashboard';
+import RestaurantSettings from './components/dashboard/Settings';
 import { FeaturedSection } from './components/home/FeaturedSection';
 import { Hero } from './components/home/Hero';
 import { PopularCategories } from './components/home/PopularCategories';
@@ -53,9 +55,9 @@ function App() {
               <DashboardLayout>
                 <Routes>
                   <Route path="dashboard" element={<RestaurantDashboard />} />
-                  {/* <Route path="menu" element={<MenuManagement />} /> */}
+                  <Route path="menu" element={<MenuManagement />} />
                   <Route path="orders" element={<OrderManagement />} />
-                  {/* <Route path="settings" element={<RestaurantSettings />} /> */}
+                  <Route path="settings" element={<RestaurantSettings />} />
                 </Routes>
               </DashboardLayout>
             </PrivateRoute>} />
